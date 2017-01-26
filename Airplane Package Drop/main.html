@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>Airplane Package Drop Simulation</title>
+		<meta author="Abhi Nayar">
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<body>
+		<div id="simulationParameters">
+			<div style="width: 100%; text-align: center; margin-top: 10px; font-weight: bold; font-size: 30px; font-family: sans-serif;">
+				<span>PACKAGE DROP SIMULATION</span>
+			</div>			
+			<div id="optionsDiv" style="text-align: center; height: 65px; margin-top: 10px;">
+				<table style="width: 100%; padding: 0 150px">
+					<tr style="text-align: center;">
+						<td style="vertical-align: middle" class="UItext">Plane Speed</td>
+						<td style="vertical-align: middle"><input onchange="changePlaneSpeed();" type="RANGE" min="0" max="40" step="2" id="spnPlaneSpeed" /></td>
+						<td style="vertical-align: middle"><span class="UItext" id="txtPlaneSpeed"></span></td>
+						<td style="width: 50px"></td>
+						<td style="vertical-align: middle" class="UItext">Plane Height</td>
+						<td style="vertical-align: middle"><input onchange="changePlaneHeight();" type="RANGE" min="0" max="100" step="2" id="spnPlaneHeight" /></td>
+						<td style="vertical-align: middle"><span class="UItext" id="txtPlaneHeight"></span></td>
+						<td style="width: 50px"></td>
+						<td style="vertical-align: middle" class="UItext">Dropzone Radius</td>
+						<td style="vertical-align: middle"><input onchange="changeDropZoneRadius();" type="RANGE" min="20" max="50" step="2" id="spnDropZoneRadius" /></td>
+						<td style="vertical-align: middle"><span class="UItext" id="txtDropZoneRadius"></span></td>
+						<td style="width: 50px"></td>
+					</tr>
+				</table>
+				<table style="width: 100%; padding: 0 400px">
+					<tr style="text-align: center;">
+						<td style="vertical-align: middle" class="UItext">Plane Rotation</td>
+						<td style="vertical-align: middle"><input onchange="changePlaneRotation();" type="RANGE" min="-30" max="60" step="1" id="spnPlaneRotation" /></td>
+						<td style="vertical-align: middle"><span class="UItext" id="txtPlaneRotation"></span></td>
+						<td style="width: 50px"></td>
+						<td style="vertical-align: middle" class="UItext">Wind Direction</td>
+						<td style="vertical-align: middle"><input onchange="changeWindDirection();" type="RANGE" min="-20" max="20" step="2" id="spnWindDirection" /></td>
+						<td style="vertical-align: middle"><span class="UItext" id="txtWindDirection"></span></td>
+					</tr>
+				</table>
+				 
+			</div>
+			<div id="controlDiv" style="text-align: center;">
+				<button type="button" onclick="startOrPauseSimulation();" id="btnStartAndPause" class="UIbutton">Start</button>				
+				<button type="button"  onclick="dropPackage();" class="UIbutton">Drop Package</button>
+				<button type="button" onclick="restartSimulation();" class="UIbutton">Restart</button>
+			</div>
+
+		</div>
+		<canvas onmousedown="canvasMouseDown(event)"
+				onmouseup="canvasMouseUp()"
+		 		id="simulationBox" width="1400" height="500">
+            Sorry! Your browser does not support HTML5, please update it.
+
+            <input type="checkbox" checked="true" />
+
+        </canvas>
+
+
+	</body>
+
+	<script type="text/javascript" src="js/constants.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/control.js"></script>
+	<script type="text/javascript" src="js/draw.js"></script>
+</html>-
