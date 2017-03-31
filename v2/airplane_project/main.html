@@ -1,0 +1,102 @@
+<html>
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<body>
+		<div id="simulationParameters">
+			<div style="width: 100%; text-align: center; margin-top: 10px; font-weight: bold; font-size: 30px; font-family: sans-serif;">
+				<span>PACKAGE DROP SIMULATION</span>
+			</div>			
+			<div id="optionsDiv" style="text-align: center; height: 105px; margin-top: 5px; margin-bottom: 5px;">
+				<table style="width: 100%; padding: 0 50px">
+					<tr style="text-align: center; height: 60px">
+						<td style="vertical-align: middle;" class="UItext">Plane Speed</td>
+						<td style="vertical-align: middle"><input oninput="changePlaneSpeed(event);" onchange="changePlaneSpeed(event);" type="RANGE" min="80" max="250" step="10" id="spnPlaneSpeed" /></td>
+						<td style="vertical-align: middle; width: 80px;"><input type="text" class="UItext" id="txtPlaneSpeed" onkeypress="constraintToNumbers(event)" onchange="changePlaneSpeed(event);" maxlength="3" style="width: 40px; text-align: center;"/><span class="UItext"> m/s</span></td>
+
+						<td style="width: 80px;"></td>
+
+						<td style="vertical-align: middle" class="UItext">Package Mass</td>
+						<td style="vertical-align: middle"><input oninput="changePackageMass(event);" onchange="changePackageMass(event);" type="RANGE" min="1" max="50" step="1" id="spnPackageMass" /></td>
+						<td style="vertical-align: middle; width: 70px;"><input type="text" class="UItext" id="txtPackageMass" onkeypress="constraintToNumbers(event)" onchange="changePackageMass(event);" maxlength="3" style="width: 40px; text-align: center;"/><span class="UItext"> kg</span></td>
+
+						<td style="width: 80px;"></td>
+						
+						<td style="vertical-align: middle" class="UItext">Package Area</td>
+						<td style="vertical-align: middle;"><input oninput="changePackageArea(event);" onchange="changePackageArea(event);" type="RANGE" min="0.1" max="1" step="0.05" id="spnPackageArea" /></td>
+						<td style="vertical-align: middle; width: 80px;"><input type="text" class="UItext" id="txtPackageArea" onkeypress="constraintToNumbers(event)" onchange="changePackageArea(event);" maxlength="3" style="width: 40px; text-align: center;"/><span class="UItext"> m^2</span></td>
+						
+						<td style="width: 80px;"></td>
+
+						<td style="vertical-align: middle" class="UItext">Air Resistance</td>
+						<td style="vertical-align: middle"><input type="CHECKBOX" id="chkAirResistance"/></td>
+					</tr>
+				</table>
+				<table style="width: 100%; padding: 0 10px">
+					<tr style="text-align: center; height: 60px;">
+						<td style="vertical-align: middle;" class="UItext">Plane Rotation</td>
+						<td style="vertical-align: middle"><input oninput="changePlaneRotation(event);" onchange="changePlaneRotation(event);" type="RANGE" min="-60" max="60" step="1" id="spnPlaneRotation" /></td>
+						<td style="vertical-align: middle; width: 65px"><input type="text" class="UItext" id="txtPlaneRotation" onkeypress="constraintToNumbers(event)" onchange="changePlaneRotation(event);" style="width: 40px; text-align: center;"/> &deg;</td>
+
+						<td style="width: 20px;"></td>
+						
+						<td style="vertical-align: middle" class="UItext">Wind Velocity</td>
+						<td style="vertical-align: middle"><input oninput="changeWindDirection(event);" onchange="changeWindDirection(event);" type="RANGE" min="-20" max="20" step="2" id="spnWindDirection"/></td>
+						<td style="vertical-align: middle; width: 70px;"><input type="text" class="UItext" id="txtWindDirection" onkeypress="constraintToNumbers(event)" onchange="changeWindDirection(event);"  maxlength="3"  style="width: 40px; text-align: center;"/><span class="UItext"> m/s</span></td>						
+						
+						<td style="width: 20px;"></td>
+						
+						<td style="vertical-align: middle" class="UItext">Dropzone Radius</td>
+						<td style="vertical-align: middle"><input oninput="changeDropZoneRadius(event);" onchange="changeDropZoneRadius(event);" type="RANGE" min="100" max="600" step="20" id="spnDropZoneRadius" /></td>
+						<td style="vertical-align: middle; width: 60px"><input type="text" class="UItext" id="txtDropZoneRadius" onkeypress="constraintToNumbers(event)" onchange="changeDropZoneRadius(event);" maxlength="3" style="width: 40px; text-align: center;"/><span class="UItext"> m</span></td>
+
+						<td style="width: 20px;"></td>
+						
+						<td style="vertical-align: middle" class="UItext">Simulation Speed</td>
+						<td style="vertical-align: middle"><input oninput="changeSimulationSpeed();" onchange="changeSimulationSpeed();" type="RANGE" min="1" max="3" step="0.2" id="spnSimulationSpeed" /></td>
+						<td style="vertical-align: middle; width: 60px;"><span class="UItext" id="txtSimulationSpeed"></span></td>
+						<td style="width: 50px"></td>
+					</tr>
+				</table>
+				 
+			</div>
+			<div id="controlDiv" style="text-align: center; margin-top: 40px;">
+				<button type="button" onclick="startOrPauseSimulation();" id="btnStartAndPause" class="UIbutton" style="width: 50px;">Start</button>				
+				<button type="button"  onclick="dropPackage();" class="UIbutton">Drop Package</button>
+				<span class="UItext" style="margin-left: 5px"> Scheduled Drop Time:</span>
+				<input type="text" class="UItext" id="txtPackageDropTime" onkeypress="constraintToNumbers(event)" onchange="schedulePackageDropTime();" maxlength="5" style="width: 40px; text-align: center; "/>
+				<span class="UItext" style="margin-right: 30px""> s</span>
+				
+				<button type="button" onclick="restartSimulation();" class="UIbutton">Restart</button>
+				<button type="button" onclick="resetSimulation();" class="UIbutton">Reset</button>
+
+			</div>
+
+		</div>
+		<canvas onmousedown="canvasMouseDown(event)"
+				onmouseup="canvasMouseUp()" style="display: none;"
+		 		id="simulationBox" width="1400" height="520">
+            Sorry! Your browser does not support HTML5, please update it.
+
+        </canvas>
+        
+        <div style="position: absolute; left: 20px; top: 260px;">
+        	<input onchange="changePlaneHeight(event);" type="text" id="txtPlaneHeight" class="UItext" maxlength="5" style="width: 60px; text-align: center;" /><span class="UItext" style="margin-right: 30px""> m</span>
+        </div>
+
+        <input oninput="changePlaneHeight(event);" onchange="changePlaneHeight(event);" type="RANGE" min="100" max="1500" step="50" id="spnPlaneHeight" style="width: 360px; position: absolute; left: -140px; top: 485px; transform: rotate(-90deg);"/>
+
+        <input oninput="changeDropZonePosition(event);" onchange="changeDropZonePosition(event);" type="RANGE" min="100" max="4500" step="100" id="spnDropZonePosition" style="width: 1110px; position: absolute; left: 130px; top: 730px; "/>
+        
+        <div style="position: absolute; left: 55px; top: 730px;">
+        	<input onchange="changeDropZonePosition(event);" type="text" id="txtDropZonePosition" class="UItext" maxlength="5" style="width: 50px; text-align: center;" /><span class="UItext" style="margin-right: 30px""> m</span>
+        </div>
+
+	</body>
+
+	<script type="text/javascript" src="js/libraries/jquery-3.1.1.min.js"></script>	
+	<script type="text/javascript" src="js/constants.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/control.js"></script>
+	<script type="text/javascript" src="js/draw.js"></script>
+</html>

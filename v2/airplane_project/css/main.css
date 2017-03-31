@@ -1,0 +1,47 @@
+
+@font-face {
+    font-family: FuturaLight;
+    src: url(Futura_Light.ttf);
+}
+
+body{
+    font-family: FuturaLight, Trebuchet MS,Arial,sans-serif; 
+}
+
+#box {
+    background-color: red;
+    height: 50px;
+    left: 150px;
+    position: absolute;
+    top: 10px;
+    width: 50px;
+}
+
+canvas, #simulationParameters {
+    border: 2px solid black;
+    background-color: #808287;
+}
+
+#simulationParameters{
+	width: 1400px;
+	height: 230px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.UItext{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"]{
+    background-color: #b2b3b7;
+}
+
+.UIbutton{
+    border: 0;
+    border-radius: 3px;
+    font-size: 17px;
+    font-family: FuturaLight !important;
+    font-weight: bold;
+}
